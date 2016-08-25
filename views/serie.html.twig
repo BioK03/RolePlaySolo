@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ serie.intitule }}{% endblock %}
+
+{% block ser %}
+{% for serie in series %}
+	<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='/{{serie.image}}'/> {{serie.intitule}}</p></a></li>
+{% endfor %}
+<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+
+{% block content %}
+<h1 class="titreSerie">{{serie.intitule}}</h1>
+{% for produit in produits %}
+<div class="clearfix">
+<article class="col-xs-6">
+	<a class="articleTitle centreTexte" href="/produit/{{ produit.id }}"><p><img src='/{{ produit.image }}' title='{{produit.nom}}'/></p></a>
+</article>
+{% else %}
+	<h2>Pas encore de livres dans cette série !</h2>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block pan %}
+{{pan}}
+{% endblock %}

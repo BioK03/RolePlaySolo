@@ -1,0 +1,6 @@
+pour up :
+git add -A
+git commit --all
+git push
+
+pour down : git pull

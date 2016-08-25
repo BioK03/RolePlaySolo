@@ -1,0 +1,48 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Votre panier, {{ client.pseudo }}{% endblock %}
+
+{% block ser %}
+{% for serie in series %}
+	<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='/{{serie.image}}'/> {{ serie.intitule }}</p></a></li>				
+{% endfor %}
+<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+{% block content %}
+<h2>Votre panier, {{client.pseudo}}</h2>
+<table class="center">
+	<tr>
+		<td class="col-xs-5"><h4>Produit</h4></td>
+		<td class="col-xs-2 centreTexte"><h4>Quantite</h4></td>
+		<td class="col-xs-2 centreTexte"><h4>Prix unitaire</h4></td>
+		<td class="col-xs-2 centreTexte"><h4>Prix</h4></td>
+		<td class="col-xs-1"></td>
+	</tr>
+{% for panier in paniers %}
+	<tr class="trPanier">
+		<td class="bordHaute"><a class="articleTitle" href="/produit/{{panier.produit.id}}">{{ panier.produit.nom }}<br/><!--<img class="imgPanier" src='/{{panier.produit.image}}'/>--></a></td>
+		<td class="bordHaute centreTexte">{{ panier.quantite }}</td>
+		<td class="bordHaute centreTexte">{{ panier.produit.prix }} €</td>
+		<td class="bordHaute centreTexte">{{ panier.total }} €</td>
+		<td class="bordHaute"><span class="glyphicon glyphicon-trash"></span></td>
+	</tr>
+{% else %}
+	<tr><td>Vous n'avez actuellement aucun produit dans votre panier.<br/><a href="/">En ajouter !</a></td></tr>
+{% endfor %}
+	<tr><td class="bordHaute"><h4><b>Total</b></h4></td><td class="bordHaute"></td><td class="bordHaute"></td><td class="bordHaute centreTexte"><b>{{ total }} €</b></td><td class="bordHaute"></td></tr>
+</table><br/>
+{% if panierFormTrash %}
+	{{ form_start(panierFormTrash) }}
+		<input type="submit" class="btn btn-info col-xs-2 col-xs-offset-2" value="Vider le panier"/>
+	{{ form_end(panierFormTrash) }}
+{% endif %}
+
+
+<button type="button" class="btn btn-warning col-xs-2 col-xs-offset-4">Commander</button><br/><br/>
+{% endblock %}
+
+{% block pan %}
+{{pan}}
+{% endblock %}

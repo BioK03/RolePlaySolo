@@ -1,0 +1,45 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Role Play Solo{% endblock %}
+
+{% block ser %}
+	{% for serie in series %}
+		<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='{{serie.image}}'/> {{serie.intitule}}</p></a></li>						
+	{% endfor %}
+	
+	<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+	<nav class="imgSerieAcc">
+		{% for serie in series %}
+		<article>
+			<a class="articleTitle" href="/serie/{{ serie.id }}"><p><img class="imgDemo imgAccueil imgSerieAccueil" src='{{ serie.image }}'/><span class="glyphicon glyphicon-menu-right"></span></p></a><br/>
+		</article>
+		{% endfor %}
+	</nav>
+	
+	<div class="clearfix"></div>
+	<div class="col-sm-offset-3 col-sm-10 col-md-offset-3 col-xs-12">
+		<img src="images/logo.png"/>
+		<div class="center col-xs-9">
+			<h2>Vous êtes sur Role Play Solo, site d'achat de Livres dont VOUS êtes le Héros !</h2>
+			<p>Deux dés, un crayon et une gomme sont les seuls accessoires dont vous aurez besoin pour vivre ces aventures. Vous seul déciderez de la route à suivre, des risques à courir et des créatures à combattre. Alors bonne chance...</p>
+		</div>
+		<div class="clearfix"></div>
+{% for produit in produits %}
+		<article class="col-lg-3 col-sm-6 col-md-4 col-xs-6">
+			<a class="articleTitle" href="/produit/{{ produit.id }}"><p><img class="imgProd imgAccueil" src='{{ produit.image }}' title="{{produit.nom}}"/></p></a>
+		</article>
+{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
+{% block pan %}
+{{pan}}
+{% endblock %}

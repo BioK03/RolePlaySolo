@@ -1,0 +1,122 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Authentification{% endblock %}
+
+{% block ser %}
+{% for serie in series %}
+	<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='/{{serie.image}}'/> {{serie.intitule}}</p></a></li>				
+{% endfor %}
+<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% if error %}
+<div class="alert alert-danger">
+    <strong>Connexion échouée!</strong> {{ error }}
+</div>
+{% endif %}
+<div class="well">
+	{% for flashMessage in app.session.flashbag.get('success') %}
+		<div class="alert alert-success">
+			{{ flashMessage }}
+		</div>
+    {% endfor %}
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<ul class="nav nav-tabs nav-justified">
+				<li class="active"><a href="#connection" data-toggle="tab">Connexion</a></li>
+				<li><a href="#inscription" data-toggle="tab">Inscription</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="tab-content">
+            <div class="tab-pane fade in active" id="connection"><br/>
+				<form class="form-signin form-horizontal" role="form" action="{{ path('login_check') }}" method="post">
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+						<input type="email" name="_username" value="{{ last_username }}" class="form-control" placeholder="Entrez votre mail" required autofocus>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+							<input type="password" name="_password" class="form-control" placeholder="Entrez votre mot de passe" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+							<button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Se connecter</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="tab-pane fade" id="inscription"><br/>
+				{% if(clientFormRegister) %}
+				{{ form_start(clientFormRegister) }}
+				<div class="form-group">
+						{{ form_errors(clientFormRegister.pseudo) }}
+						{{ form_label(clientFormRegister.pseudo, 'Pseudo') }}
+						{{ form_widget(clientFormRegister.pseudo, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre pseudo'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientFormRegister.username) }}
+						{{ form_label(clientFormRegister.username, 'Mail') }}
+						{{ form_widget(clientFormRegister.username, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre mail'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientFormRegister.address) }}
+						{{ form_label(clientFormRegister.address, 'Adresse') }}
+						{{ form_widget(clientFormRegister.address, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre adresse'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientFormRegister.cp) }}
+						{{ form_label(clientFormRegister.cp, 'Code postal') }}
+						{{ form_widget(clientFormRegister.cp, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre code postal'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientFormRegister.city) }}
+						{{ form_label(clientFormRegister.city, 'Ville') }}
+						{{ form_widget(clientFormRegister.city, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre ville'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientFormRegister.password) }}
+						{{ form_label(clientFormRegister.password, 'Mot de passe') }}
+						{{ form_widget(clientFormRegister.password, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre mot de passe'
+						}}) }}
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+							<button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> S'inscrire</button>
+						</div>
+					</div>
+				
+				{{ form_end(clientFormRegister) }}
+				{% endif %}
+			</div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta description="roleplaysolo, role, play, solo, jeu, role, rôle, dé, société, livre, dont, je, suis, le , héros, vous, etes, êtes, heros, ldvelh">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ app.request.basepath }}/css/rps.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet' type='text/css'> <!-- police -->
+    <title>RolePlaySolo - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="titrePage navbar-brand" href="/">Role Play Solo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-target">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-book"></span> Séries <b class="caret"></b>
+								</a>
+                                <ul class="dropdown-menu">
+									{% block ser %}{% endblock %}
+                                </ul>
+						</li>
+					</ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.security.token.user.pseudo }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+									<li><a href="/modify">Modifier mon profil</a></li>
+                                    <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+                                </ul>
+                            </li>
+							<li class="presentation">
+								<a href="/panier">
+									<span class="glyphicon glyphicon-shopping-cart"></span> Panier ( {%block pan%}{%endblock%})
+								</a>
+							</li>
+                        {% else %}
+                            <li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-user"></span> Non connecté <b class="caret"></b>
+								</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('login') }}">Se connecter / S'inscrire</a></li>
+                                </ul>
+                            </li>
+							
+							
+                        {% endif %}
+                    </ul>
+                </div>
+            </div><!-- /.container -->
+        </nav>
+        <div id="content">
+			<img id="imgCrayon" src="/images/crayon.png"/>
+			<img id="imgDe" src="/images/de2.png"/>
+			<div class="contentDiv">{% block content %}{% endblock %}</div>
+		</div>
+        <footer class="footer">
+			<a href="https://github.com/polytechlyon-isi2/RolePlaySolo">Role Play Solo</a> est une démonstration minimaliste de ce que l'on peut faire avec Silex.
+		</footer>
+    </div>
+	
+	<!-- jQuery -->
+    <script src="{{ app.request.basepath }}/lib/jquery/jquery-1.11.2.min.js"></script>
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ produit.nom }}{% endblock %}
+
+{% block ser %}
+{% for serie in series %}
+	<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='/{{serie.image}}'/> {{serie.intitule}}</p></a></li>				
+{% endfor %}
+<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+{% block content %}
+<p>
+	
+	<table>
+	<tr><td><a href="/serie/{{produit.numSerie}}"><span class="glyphicon glyphicon-menu-left"></span> Voir tous les livres de cette série</a></td>
+		<td><a href="/tous"><span class="glyphicon glyphicon-list-alt"></span> Voir tous les produits</a></td></tr></table>
+		{% for flashMessage in app.session.flashbag.get('panierSuccess') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+	<table><tr><td>
+		<br/><br/>
+		<img src="/{{produit.image}}"/><br/>
+		
+	</td><td>
+		<h2>{{ produit.nom }}</h2>
+		Editions {{produit.editeur}} / Auteur : {{produit.auteur}} / ISBN : {{produit.isbn}}<br/><br/>
+	</td><td>
+		<h3>Prix : {{produit.prix}} €</h3>
+	
+		{% if produit.quantite>0 %}
+			{% if panierForm %}
+				{{ form_start(panierForm) }}
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Ajouter au panier"/>
+					</div>
+				{{ form_end(panierForm) }}
+			{% endif %}
+			<br/>Encore {{produit.quantite}} en stock !!
+		{% else %}
+			<button type="button" class="btn btn-warning disabled"><span class="glyphicon glyphicon-remove"></span> Plus en stock</button>
+		{% endif %}
+	</td></tr></table>
+	
+	
+	{{ produit.description }}<br/>
+	
+		
+    <h3>Commentaires</h3>
+    {% for commentaire in commentaires %}
+        <strong>{{ commentaire.auteur.pseudo }}</strong> dit : {{ commentaire.content }}<br>
+    {% else %}
+        Pas encore de commentaires.
+    {% endfor %}
+	
+	<h3>Ajoutez un commentaire (<span class="glyphicon glyphicon-thumbs-up"></span> <span class="glyphicon glyphicon-thumbs-down"></span>)</h3>
+    {% if commentaireForm %}
+        {{ form_start(commentaireForm) }}
+            <div class="form-group">
+                {{ form_errors(commentaireForm.content) }}
+                {{ form_widget(commentaireForm.content, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez votre commentaire'
+                }}) }}
+            </div>
+            <div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Publier votre commentaire" />
+            </div>
+        {{ form_end(commentaireForm) }}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <a href="{{ path('login') }} ">Conectez-vous</a> pour ajouter des commentaires.
+    {% endif %}
+</p>
+{% endblock %}
+
+{% block pan %}
+{{pan}}
+{% endblock %}

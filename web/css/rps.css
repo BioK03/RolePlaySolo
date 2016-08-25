@@ -1,0 +1,161 @@
+/* Media querries */
+@media screen and (max-width: 767px) {
+	.imgSerieAcc {
+		display: none;
+	}
+}
+
+
+/* **************************** */
+body { 
+    padding-top: 60px; 
+	position: relative;
+	z-index: 1;
+}
+
+.footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.articleTitle:hover, .articleTitle:focus {
+    text-decoration: none;
+}
+
+.imgSerie {
+	width: 2em;
+	height: 1em;
+}
+
+.produitArt {
+	width: 33%;
+	display: inline;
+}
+
+.w33 {
+	width: 33%;
+	margin: 0 auto;
+}
+
+td {
+	padding: 1em;
+}
+
+.trPanier {
+	background-color: #FFFFFF;
+
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+}
+
+.trPanier:hover {
+	background-color: #DDDDDD;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.imgDemo {
+	width: 100%;
+}
+
+.imgProd {
+	height: 100%;
+}
+
+.imgProd:nth-child(3n+2) {
+	clear: left;
+}
+
+.titreProd {
+	height: 2em;
+}
+
+.bordDroite{
+	border-right : 1px solid #888888;
+}
+.bordHaute{
+	border-top : 1px solid #888888;
+}
+
+.imgPanier{
+	height : 15em;
+}
+
+.centreTexte{
+	text-align : center;
+}
+
+.imgAccueil{
+	opacity : 0.87;
+	
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+}
+
+.imgAccueil:hover{
+	opacity : 1;
+}
+
+.titreSerie{
+	text-align:center;
+	font-size : 5em;
+}
+
+#imgCrayon {
+	position:fixed;
+	top: 40px;
+	right: 0;
+	width: 15em;
+	z-index: 1;
+}
+
+#imgDe {
+	position:fixed;
+	bottom: 0;
+	left: 0;
+	width: 15em;
+	z-index: 1;
+}
+
+nav {
+	position: fixed;
+	top: 100px;
+	left: 0;
+}
+
+.imgSerieAccueil {
+	width: 15em;
+	margin: 0.2em;
+	z-index: 10;
+	
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+}
+
+.imgSerieAccueil:hover {
+	margin-left: 2em;
+}
+
+.navbar {
+	background-color: #555555;
+}
+
+.titrePage{
+	font-family: 'Vidaloka', cursive;
+	font-size: xx-large;
+}
+
+.contentDiv {
+	z-index: 10;
+	position: relative;
+}
+

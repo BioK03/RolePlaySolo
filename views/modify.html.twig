@@ -1,0 +1,109 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block ser %}
+{% for serie in series %}
+	<li><a href="/serie/{{serie.id}}"><p><img class='imgSerie' src='/{{serie.image}}'/> {{serie.intitule}}</p></a></li>				
+{% endfor %}
+<li class="divider"></li>
+	<li><a href="/tous">Tous les produits</a></li>
+{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+		{% for flashMessage in app.session.flashbag.get('success') %}
+			<div class="alert alert-success">
+				{{ flashMessage }}
+			</div>
+		{% endfor %}
+		<div class="row well">
+			{% for flashMessage in app.session.flashbag.get('modifySuccess') %}
+					<div class="alert alert-success">
+						{{ flashMessage }}
+					</div>
+				{% endfor %}
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 bordDroite">
+			{% if clientForm %}
+				{{ form_start(clientForm) }}
+					<div class="form-group">
+						{{ form_errors(clientForm.pseudo) }}
+						{{ form_label(clientForm.pseudo, 'Pseudo') }}
+						{{ form_widget(clientForm.pseudo, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre pseudo'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientForm.username) }}
+						{{ form_label(clientForm.username, 'Mail') }}
+						{{ form_widget(clientForm.username, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre mail'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientForm.address) }}
+						{{ form_label(clientForm.address, 'Adresse') }}
+						{{ form_widget(clientForm.address, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre adresse'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientForm.cp) }}
+						{{ form_label(clientForm.cp, 'Code postal') }}
+						{{ form_widget(clientForm.cp, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre code postal'
+						}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_errors(clientForm.city) }}
+						{{ form_label(clientForm.city, 'Ville') }}
+						{{ form_widget(clientForm.city, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre ville'
+						}}) }}
+					</div>
+								
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+							<button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Modifier</button>
+						</div>
+					</div>
+				{{ form_end(clientForm) }}
+			{% endif %}
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				{% if clientFormPass %}
+				{{ form_start(clientFormPass) }}
+					<div class="form-group">
+						{{ form_errors(clientFormPass.password) }}
+						{{ form_label(clientFormPass.password, 'Mot de passe') }}
+						{{ form_widget(clientFormPass.password, { 'attr':  {
+							'rows': '1',
+							'class': 'form-control',
+							'placeholder': 'Entrez votre mot de passe'
+						}}) }}
+					</div>								
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+							<button type="submit" class="btn btn-default btn-info"><span class="glyphicon glyphicon-log-in"></span> Modifier</button>
+						</div>
+					</div>
+				{{form_end(clientFormPass) }}
+				{% endif %}
+			</div>
+		</div>
+		<div class="clearfix"></div>
+{% endblock %}
+
+{% block pan %}
+{{pan}}
+{% endblock %}
